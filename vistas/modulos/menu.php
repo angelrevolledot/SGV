@@ -93,7 +93,7 @@
 					
 					<li>
 
-						<a href="#">
+						<a href="/SGV/editar-compra">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Administrar compras</span>
@@ -104,7 +104,7 @@
 
 					<li>
 
-						<a href="#">
+						<a href="/SGV/crear-compra">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Nueva compra</span>
@@ -117,7 +117,7 @@
 
 					echo '<li>
 
-						<a href="#">
+						<a href="/SGV/compras">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Reporte de compras</span>
