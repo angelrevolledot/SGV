@@ -57,6 +57,84 @@
 			</li>';
 
 		}
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
+
+			echo '<li>
+
+				<a href="proveedores">
+
+					<i class="fas fa-user-plus"></i>
+					<span> Proveedores</span>
+
+				</a>
+
+			</li>';
+
+		}
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
+
+			echo '<li class="treeview">
+
+				<a href="#">
+
+					<i class="fas fa-shopping-cart"></i>
+					
+					<span>Compras</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
+
+				</a>
+
+				<ul class="treeview-menu">
+					
+					<li>
+
+						<a href="#">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Administrar compras</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="#">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Nueva compra</span>
+
+						</a>
+
+					</li>';
+
+					if($_SESSION["perfil"] == "Administrador"){
+
+					echo '<li>
+
+						<a href="#">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Reporte de compras</span>
+
+						</a>
+
+					</li>';
+
+					}
+
+				
+
+				echo '</ul>
+
+			</li>';
+
+		}
 
 		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
 
