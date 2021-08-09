@@ -140,75 +140,75 @@ class ControladorCompras{
 
 				// $imprimir -> close();
 
-				$impresora = "epson20";
+				//$impresora = "epson20";
 
-				$conector = new WindowsPrintConnector($impresora);
+				//$conector = new WindowsPrintConnector($impresora);
 
-				$printer = new Printer($conector);
+				//$printer = new Printer($conector);
 
-				$printer -> setJustification(Printer::JUSTIFY_CENTER);
+				//$printer -> setJustification(Printer::JUSTIFY_CENTER);
 
-				$printer -> text(date("Y-m-d H:i:s")."\n");//Fecha de la factura
+				//$printer -> text(date("Y-m-d H:i:s")."\n");//Fecha de la factura
 
-				$printer -> feed(1); //Alimentamos el papel 1 vez*/
+				//$printer -> feed(1); //Alimentamos el papel 1 vez
 
-				$printer -> text("Inventory System"."\n");//Nombre de la empresa
+				//$printer -> text("Inventory System"."\n");//Nombre de la empresa
 
-				$printer -> text("NIT: 71.759.963-9"."\n");//Nit de la empresa
+				//$printer -> text("NIT: 71.759.963-9"."\n");//Nit de la empresa
 
-				$printer -> text("Dirección: Calle 44B 92-11"."\n");//Dirección de la empresa
+				//$printer -> text("Dirección: Calle 44B 92-11"."\n");//Dirección de la empresa
 
-				$printer -> text("Teléfono: 300 786 52 49"."\n");//Teléfono de la empresa
+				//$printer -> text("Teléfono: 300 786 52 49"."\n");//Teléfono de la empresa
 
-				$printer -> text("FACTURA N.".$_POST["nuevaCompra"]."\n");//Número de factura
+				//$printer -> text("FACTURA N.".$_POST["nuevaCompra"]."\n");//Número de factura
 
-				$printer -> feed(1); //Alimentamos el papel 1 vez*/
+				//$printer -> feed(1); //Alimentamos el papel 1 vez
 
-				$printer -> text("Proveedor: ".$traerProveedor["nombre"]."\n");//Nombre del proveedor
+				//$printer -> text("Proveedor: ".$traerProveedor["nombre"]."\n");//Nombre del proveedor
 
-				$tablaVendedor = "usuarios";
-				$item = "id";
-				$valor = $_POST["idVendedor"];
+				//$tablaVendedor = "usuarios";
+				//$item = "id";
+				//$valor = $_POST["idVendedor"];
 
-				$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
+				//$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
 
-				$printer -> text("Usuario: ".$traerVendedor["nombre"]."\n");//Nombre del vendedor
+				//$printer -> text("Usuario: ".$traerVendedor["nombre"]."\n");//Nombre del vendedor
 
-				$printer -> feed(1); //Alimentamos el papel 1 vez*/
+				//$printer -> feed(1); //Alimentamos el papel 1 vez
 
-				foreach ($listaProductos as $key => $value) {
+				//foreach ($listaProductos as $key => $value) {
 
-					$printer->setJustification(Printer::JUSTIFY_LEFT);
+				//	$printer->setJustification(Printer::JUSTIFY_LEFT);
 
-					$printer->text($value["descripcion"]."\n");//Nombre del producto
+				//	$printer->text($value["descripcion"]."\n");//Nombre del producto
 
-					$printer->setJustification(Printer::JUSTIFY_RIGHT);
+				//	$printer->setJustification(Printer::JUSTIFY_RIGHT);
 
-					$printer->text("$ ".number_format($value["precio"],2)." Und x ".$value["cantidad"]." = $ ".number_format($value["total"],2)."\n");
+				//	$printer->text("$ ".number_format($value["precio"],2)." Und x ".$value["cantidad"]." = $ ".number_format($value["total"],2)."\n");
 
-				}
+				//}
 
-				$printer -> feed(1); //Alimentamos el papel 1 vez*/			
-				
-				$printer->text("NETO: $ ".number_format($_POST["nuevoPrecioNeto"],2)."\n"); //ahora va el neto
+				//$printer -> feed(1); //Alimentamos el papel 1 vez*/			
+				//
+				//$printer->text("NETO: $ ".number_format($_POST["nuevoPrecioNeto"],2)."\n"); //ahora va el neto
 
-				$printer->text("IMPUESTO: $ ".number_format($_POST["nuevoPrecioImpuesto"],2)."\n"); //ahora va el impuesto
+				//$printer->text("IMPUESTO: $ ".number_format($_POST["nuevoPrecioImpuesto"],2)."\n"); //ahora va el impuesto
 
-				$printer->text("--------\n");
+				//$printer->text("--------\n");
 
-				$printer->text("TOTAL: $ ".number_format($_POST["totalCompra"],2)."\n"); //ahora va el total
+				//$printer->text("TOTAL: $ ".number_format($_POST["totalCompra"],2)."\n"); //ahora va el total
 
-				$printer -> feed(1); //Alimentamos el papel 1 vez*/	
+				//$printer -> feed(1); //Alimentamos el papel 1 vez
 
-				$printer->text("Muchas gracias por su compra"); //Podemos poner también un pie de página
+				//$printer->text("Muchas gracias por su compra"); //Podemos poner también un pie de página
 
-				$printer -> feed(3); //Alimentamos el papel 3 veces*/
+				//$printer -> feed(3); //Alimentamos el papel 3 veces
 
-				$printer -> cut(); //Cortamos el papel, si la impresora tiene la opción
+				//$printer -> cut(); //Cortamos el papel, si la impresora tiene la opción
 
-				$printer -> pulse(); //Por medio de la impresora mandamos un pulso, es útil cuando hay cajón moneder
+				//$printer -> pulse(); //Por medio de la impresora mandamos un pulso, es útil cuando hay cajón moneder
 
-				$printer -> close();
+				//$printer -> close();
 
 	
 				echo'<script>
@@ -289,12 +289,12 @@ class ControladorCompras{
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
 
 					$item1a = "compras";
-					$valor1a = $traerProducto["compras"] - $value["cantidad"];
+					$valor1a = intval( $traerProducto["compras"] ) - intval( $value["cantidad"]);
 
 					$nuevasCompras = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
 
 					$item1b = "stock";
-					$valor1b = $value["cantidad"] + $traerProducto["stock"];
+					$valor1b = intval( $traerProducto["stock"] ) - intval( $value["cantidad"] );
 
 					$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
 
@@ -333,12 +333,16 @@ class ControladorCompras{
 					$traerProducto_2 = ModeloProductos::mdlMostrarProductos($tablaProductos_2, $item_2, $valor_2, $orden);
 
 					$item1a_2 = "compras";
-					$valor1a_2 = $value["cantidad"] + $traerProducto_2["compras"];
+					$valor1a_2 = $value["cantidad"] + intval( $traerProducto_2["compras"] )  ;
+
+          echo( var_dump($valor1a_2) );
 
 					$nuevasCompras_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1a_2, $valor1a_2, $valor_2);
 
 					$item1b_2 = "stock";
-					$valor1b_2 = $traerProducto_2["stock"] - $value["cantidad"];
+					$valor1b_2 = intval( $traerProducto_2["stock"] ) + intval( $value["cantidad"] );
+
+          echo( var_dump($valor1b_2) );
 
 					$nuevoStock_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1b_2, $valor1b_2, $valor_2);
 

@@ -373,6 +373,8 @@ $('.formularioCompra').on('change', 'input.nuevaCantidadProducto', function () {
 
   var nuevoStock = Number($(this).attr('stock')) + Number($(this).val())
 
+  console.log(nuevoStock)
+
   $(this).attr('nuevoStock', nuevoStock)
 
   // if (Number($(this).val()) > Number($(this).attr('stock'))) {
