@@ -46,8 +46,8 @@
            
            <th style="width:10px">#</th>
            <th>Código factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
+           <th>Usuario</th>
+           <th>Proveedor</th>
            <th>Forma de pago</th>
            <th>Neto</th>
            <th>Total</th> 
@@ -66,7 +66,7 @@
 
             <td>1000123</td>
 
-            <td>Juan Villegas</td>
+            <td>Benito Carranza</td>
 
             <td>Julio Gómez</td>
 

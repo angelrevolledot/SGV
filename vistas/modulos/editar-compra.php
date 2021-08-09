@@ -46,14 +46,14 @@
                     $compra = ControladorCompras::ctrMostrarCompras($item, $valor);
 
                     $itemUsuario = "id";
-                    $valorUsuario = $compra["id_vendedor"];
+                    $valorUsuario = $compra["id_usuario"];
 
                     $vendedor = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
 
-                    $itemCliente = "id";
-                    $valorCliente = $compra["id_cliente"];
+                    $itemProveedor = "id";
+                    $valorProveedor = $compra["id_proveedor"];
 
-                    $cliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+                    $proveedor = ControladorProveedores::ctrMostrarProveedores($itemProveedor, $valorProveedor);
 
                     $porcentajeImpuesto = $compra["impuesto"] * 100 / $compra["neto"];
 
@@ -104,16 +104,17 @@
                     
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
                     
-                    <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+                    <select class="form-control" id="seleccionarProveedor" name="seleccionarProveedor" required>
 
-                    <option value="<?php echo $cliente["id"]; ?>"><?php echo $cliente["nombre"]; ?></option>
+                    <!--<option value="<?php echo $proveedor["id"]; ?>"><?php echo $proveedor["nombre"]; ?></option> -->
+                    <option value="">Seleccionar proveedor</option>
 
                     <?php
 
                       $item = null;
                       $valor = null;
 
-                      $categorias = ControladorClientes::ctrMostrarClientes($item, $valor);
+                      $categorias = ControladorProveedores::ctrMostrarProveedores($item, $valor);
 
                        foreach ($categorias as $key => $value) {
 
@@ -125,7 +126,7 @@
 
                     </select>
                     
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span>
+                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarProveedor" data-dismiss="modal">Agregar proveedor</button></span>
                   
                   </div>
                 
@@ -365,7 +366,7 @@
 MODAL AGREGAR CLIENTE
 ======================================-->
 
-<div id="modalAgregarCliente" class="modal fade" role="dialog">
+<div id="modalAgregarProveedor" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -381,7 +382,7 @@ MODAL AGREGAR CLIENTE
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Agregar cliente</h4>
+          <h4 class="modal-title">Agregar proveedor</h4>
 
         </div>
 
@@ -401,7 +402,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevoProveedor" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -489,7 +490,7 @@ MODAL AGREGAR CLIENTE
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar cliente</button>
+          <button type="submit" class="btn btn-primary">Guardar proveedor</button>
 
         </div>
 
@@ -497,8 +498,8 @@ MODAL AGREGAR CLIENTE
 
       <?php
 
-        $crearCliente = new ControladorClientes();
-        $crearCliente -> ctrCrearCliente();
+        $crearProveedor = new ControladorProveedores();
+        $crearProveedor -> ctrCrearProveedor();
 
       ?>
 

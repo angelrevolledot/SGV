@@ -75,7 +75,7 @@
 
 			echo '<li class="treeview">
 
-				<a href="#">
+				<a hef="#">
 
 					<i class="fas fa-shopping-cart"></i>
 					
@@ -93,7 +93,7 @@
 					
 					<li>
 
-						<a href="/SGV/editar-compra">
+						<a href="/SGV/compras">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Administrar compras</span>
@@ -117,7 +117,7 @@
 
 					echo '<li>
 
-						<a href="/SGV/compras">
+						<a href="/SGV/reportes-compras">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Reporte de compras</span>

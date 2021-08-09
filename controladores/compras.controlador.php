@@ -39,7 +39,7 @@ class ControladorCompras{
 
 				swal({
 					  type: "error",
-					  title: "La venta no se ha ejecuta si no hay productos",
+					  title: "La compra no se ha ejecuta si no hay productos",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
@@ -84,18 +84,18 @@ class ControladorCompras{
 
 			}
 
-			$tablaClientes = "clientes";
+			$tablaProveedores = "proveedores";
 
 			$item = "id";
-			$valor = $_POST["seleccionarCliente"];
+			$valor = $_POST["seleccionarProveedor"];
 
-			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $item, $valor);
+			$traerProveedor = ModeloProveedores::mdlMostrarProveedores($tablaProveedores, $item, $valor);
 
 			$item1a = "compras";
-				
-			$valor1a = array_sum($totalProductosComprados) + $traerCliente["compras"];
 
-			$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
+			$valor1a = array_sum($totalProductosComprados) + intval( $traerProveedor["compras"] );
+
+			$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item1a, $valor1a, $valor);
 
 			$item1b = "ultima_compra";
 
@@ -105,7 +105,7 @@ class ControladorCompras{
 			$hora = date('H:i:s');
 			$valor1b = $fecha.' '.$hora;
 
-			$fechaCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);
+			$fechaProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item1b, $valor1b, $valor);
 
 			/*=============================================
 			GUARDAR LA COMPRA
@@ -113,8 +113,8 @@ class ControladorCompras{
 
 			$tabla = "compras";
 
-			$datos = array("id_vendedor"=>$_POST["idVendedor"],
-						   "id_cliente"=>$_POST["seleccionarCliente"],
+      $datos = array( "id_usuario"=>$_POST["idVendedor"],
+               "id_proveedor"=>$_POST["seleccionarProveedor"],
 						   "codigo"=>$_POST["nuevaCompra"],
 						   "productos"=>$_POST["listaProductos"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
@@ -122,7 +122,9 @@ class ControladorCompras{
 						   "total"=>$_POST["totalCompra"],
 						   "metodo_pago"=>$_POST["listaMetodoPago"]);
 
+
 			$respuesta = ModeloCompras::mdlIngresarCompra($tabla, $datos);
+
 
 			if($respuesta == "ok"){
 
@@ -162,7 +164,7 @@ class ControladorCompras{
 
 				$printer -> feed(1); //Alimentamos el papel 1 vez*/
 
-				$printer -> text("Cliente: ".$traerCliente["nombre"]."\n");//Nombre del cliente
+				$printer -> text("Proveedor: ".$traerProveedor["nombre"]."\n");//Nombre del proveedor
 
 				$tablaVendedor = "usuarios";
 				$item = "id";
@@ -170,7 +172,7 @@ class ControladorCompras{
 
 				$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
 
-				$printer -> text("Vendedor: ".$traerVendedor["nombre"]."\n");//Nombre del vendedor
+				$printer -> text("Usuario: ".$traerVendedor["nombre"]."\n");//Nombre del vendedor
 
 				$printer -> feed(1); //Alimentamos el papel 1 vez*/
 
@@ -215,7 +217,7 @@ class ControladorCompras{
 
 				swal({
 					  type: "success",
-					  title: "La venta ha sido guardada correctamente",
+					  title: "La compra ha sido guardada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
@@ -298,17 +300,17 @@ class ControladorCompras{
 
 				}
 
-				$tablaClientes = "clientes";
+				$tablaProveedores = "proveedores";
 
-				$itemCliente = "id";
-				$valorCliente = $_POST["seleccionarCliente"];
+				$itemProveedor = "id";
+				$valorProveedor = $_POST["seleccionarProveedor"];
 
-				$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
+				$traerProveedor = ModeloProveedores::mdlMostrarProveedores($tablaProveedores, $itemProveedor, $valorProveedor);
 
 				$item1a = "compras";
-				$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);		
+				$valor1a = $traerProveedor["compras"] - array_sum($totalProductosComprados);		
 
-				$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valorCliente);
+				$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item1a, $valor1a, $valorProveedor);
 
 				/*=============================================
 				ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
@@ -342,18 +344,18 @@ class ControladorCompras{
 
 				}
 
-				$tablaClientes_2 = "clientes";
+				$tablaProveedores_2 = "proveedores";
 
 				$item_2 = "id";
-				$valor_2 = $_POST["seleccionarCliente"];
+				$valor_2 = $_POST["seleccionarProveedor"];
 
-				$traerCliente_2 = ModeloClientes::mdlMostrarClientes($tablaClientes_2, $item_2, $valor_2);
+				$traerProveedor_2 = ModeloProveedores::mdlMostrarProveedores($tablaProveedores_2, $item_2, $valor_2);
 
 				$item1a_2 = "compras";
 
-				$valor1a_2 = array_sum($totalProductosComprados_2) + $traerCliente_2["compras"];
+				$valor1a_2 = array_sum($totalProductosComprados_2) + $traerProveedor_2["compras"];
 
-				$comprasCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes_2, $item1a_2, $valor1a_2, $valor_2);
+				$comprasProveedor_2 = ModeloProveedores::mdlActualizarProveedor($tablaProveedores_2, $item1a_2, $valor1a_2, $valor_2);
 
 				$item1b_2 = "ultima_compra";
 
@@ -363,7 +365,7 @@ class ControladorCompras{
 				$hora = date('H:i:s');
 				$valor1b_2 = $fecha.' '.$hora;
 
-				$fechaCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes_2, $item1b_2, $valor1b_2, $valor_2);
+				$fechaProveedor_2 = ModeloProveedores::mdlActualizarProveedor($tablaProveedores_2, $item1b_2, $valor1b_2, $valor_2);
 
 			}
 
@@ -371,8 +373,8 @@ class ControladorCompras{
 			GUARDAR CAMBIOS DE LA COMPRA
 			=============================================*/	
 
-			$datos = array("id_vendedor"=>$_POST["idVendedor"],
-						   "id_cliente"=>$_POST["seleccionarCliente"],
+			$datos = array("id_usuario"=>$_POST["idVendedor"],
+						   "id_proveedor"=>$_POST["seleccionarProveedor"],
 						   "codigo"=>$_POST["editarCompra"],
 						   "productos"=>$listaProductos,
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
@@ -391,7 +393,7 @@ class ControladorCompras{
 
 				swal({
 					  type: "success",
-					  title: "La venta ha sido editada correctamente",
+					  title: "La compra ha sido editada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then((result) => {
@@ -430,7 +432,7 @@ class ControladorCompras{
 			ACTUALIZAR FECHA ÚLTIMA COMPRA
 			=============================================*/
 
-			$tablaClientes = "clientes";
+			$tablaProveedores = "proveedores";
 
 			$itemCompras = null;
 			$valorCompras = null;
@@ -441,7 +443,7 @@ class ControladorCompras{
 
 			foreach ($traerCompras as $key => $value) {
 				
-				if($value["id_cliente"] == $traerCompra["id_cliente"]){
+				if($value["id_proveedor"] == $traerCompra["id_proveedor"]){
 
 					array_push($guardarFechas, $value["fecha"]);
 
@@ -455,17 +457,17 @@ class ControladorCompras{
 
 					$item = "ultima_compra";
 					$valor = $guardarFechas[count($guardarFechas)-2];
-					$valorIdCliente = $traerCompra["id_cliente"];
+					$valorIdProveedor = $traerCompra["id_proveedor"];
 
-					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+					$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item, $valor, $valorIdProveedor);
 
 				}else{
 
 					$item = "ultima_compra";
 					$valor = $guardarFechas[count($guardarFechas)-1];
-					$valorIdCliente = $traerCompra["id_cliente"];
+					$valorIdProveedor = $traerCompra["id_proveedor"];
 
-					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+					$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item, $valor, $valorIdProveedor);
 
 				}
 
@@ -474,9 +476,9 @@ class ControladorCompras{
 
 				$item = "ultima_compra";
 				$valor = "0000-00-00 00:00:00";
-				$valorIdCliente = $traerCompra["id_cliente"];
+				$valorIdProveedor = $traerCompra["id_proveedor"];
 
-				$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+				$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item, $valor, $valorIdProveedor);
 
 			}
 
@@ -512,17 +514,17 @@ class ControladorCompras{
 
 			}
 
-			$tablaClientes = "clientes";
+			$tablaProveedores = "proveedores";
 
-			$itemCliente = "id";
-			$valorCliente = $traerCompra["id_cliente"];
+			$itemProveedor = "id";
+			$valorProveedor = $traerCompra["id_proveedor"];
 
-			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
+			$traerProveedor = ModeloProveedores::mdlMostrarProveedores($tablaProveedores, $itemProveedor, $valorProveedor);
 
 			$item1a = "compras";
-			$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);
+			$valor1a = $traerProveedor["compras"] - array_sum($totalProductosComprados);
 
-			$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valorCliente);
+			$comprasProveedor = ModeloProveedores::mdlActualizarProveedor($tablaProveedores, $item1a, $valor1a, $valorProveedor);
 
 			/*=============================================
 			ELIMINAR VENTA
@@ -536,7 +538,7 @@ class ControladorCompras{
 
 				swal({
 					  type: "success",
-					  title: "La venta ha sido borrada correctamente",
+					  title: "La compra ha sido borrada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
@@ -625,12 +627,12 @@ class ControladorCompras{
 
 			foreach ($compras as $row => $item){
 
-				$cliente = ControladorClientes::ctrMostrarClientes("id", $item["id_cliente"]);
+				$proveedor = ControladorProveedores::ctrMostrarProveedores("id", $item["id_proveedor"]);
 				$vendedor = ControladorUsuarios::ctrMostrarUsuarios("id", $item["id_vendedor"]);
 
 			 echo utf8_decode("<tr>
 			 			<td style='border:1px solid #eee;'>".$item["codigo"]."</td> 
-			 			<td style='border:1px solid #eee;'>".$cliente["nombre"]."</td>
+			 			<td style='border:1px solid #eee;'>".$proveedor["nombre"]."</td>
 			 			<td style='border:1px solid #eee;'>".$vendedor["nombre"]."</td>
 			 			<td style='border:1px solid #eee;'>");
 
@@ -703,17 +705,17 @@ class ControladorCompras{
 
 			// CLIENTE
 
-			$tablaClientes = "clientes";
+			$tablaProveedores = "proveedores";
 			$item = "id";
-			$valor = $compras["id_cliente"];
+			$valor = $compras["id_proveedor"];
 
-			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $item, $valor);
+			$traerProveedor = ModeloProveedores::mdlMostrarProveedores($tablaProveedores, $item, $valor);
 
 			// VENDEDOR
 
 			$tablaVendedor = "usuarios";
 			$item = "id";
-			$valor = $compras["id_vendedor"];
+			$valor = $compras["id_usuario"];
 
 			$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
 

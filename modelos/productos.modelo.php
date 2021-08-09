@@ -166,5 +166,17 @@ class ModeloProductos{
 		$stmt = null;
 	}
 
+	static public function mdlMostrarSumaCompras($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT SUM(compras) as total FROM $tabla");
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+
+		$stmt = null;
+	}
 
 }

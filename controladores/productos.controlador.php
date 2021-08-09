@@ -360,5 +360,18 @@ class ControladorProductos{
 
 	}
 
+	/*=============================================
+	MOSTRAR SUMA COMPRAS
+	=============================================*/
+
+	static public function ctrMostrarSumaCompras(){
+
+		$tabla = "productos";
+
+		$respuesta = ModeloProductos::mdlMostrarSumaCompras($tabla);
+
+		return $respuesta;
+
+	}
 
 }

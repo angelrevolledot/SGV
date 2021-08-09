@@ -95,8 +95,8 @@ if($_SESSION["perfil"] == "Especial"){
            
            <th style="width:10px">#</th>
            <th>Código factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
+           <th>Usuario</th>
+           <th>Proveedor</th>
            <th>Forma de pago</th>
            <th>Neto</th>
            <th>Total</th> 
@@ -134,16 +134,16 @@ if($_SESSION["perfil"] == "Especial"){
                   <td>'.$value["codigo"].'</td>';
 
                   $itemCliente = "id";
-                  $valorCliente = $value["id_cliente"];
+                  $valorCliente = $value["id_usuario"];
 
-                  $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+                  $respuestaCliente = ControladorUsuarios::ctrMostrarUsuarios($itemCliente, $valorCliente);
 
                   echo '<td>'.$respuestaCliente["nombre"].'</td>';
 
                   $itemUsuario = "id";
-                  $valorUsuario = $value["id_vendedor"];
+                  $valorUsuario = $value["id_proveedor"];
 
-                  $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+                  $respuestaUsuario = ControladorProveedores::ctrMostrarProveedores($itemUsuario, $valorUsuario);
 
                   echo '<td>'.$respuestaUsuario["nombre"].'</td>
 
